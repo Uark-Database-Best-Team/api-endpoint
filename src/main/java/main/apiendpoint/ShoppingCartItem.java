@@ -11,7 +11,7 @@ public class ShoppingCartItem {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer cartItemId;
   private Integer quantity;
-  private String isbn;
+  private Integer isbn;
   private Integer cartId;
 
   public Integer getCartItemId() {
@@ -30,11 +30,11 @@ public class ShoppingCartItem {
     this.quantity = quantity;
   }
 
-  public String getIsbn() {
+  public Integer getIsbn() {
     return this.isbn;
   }
 
-  public void setIsbn(String isbn) {
+  public void setIsbn(Integer isbn) {
     this.isbn = isbn;
   }
 

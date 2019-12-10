@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 public class HelloController {
   @Autowired
-
   BookRepository booksController;
+
+  @Autowired
   ShoppingCartRepository cartController;
+
+  @Autowired
   ShoppingCartItemRepository cartItems;
 
   @RequestMapping("/")
@@ -48,6 +51,11 @@ public class HelloController {
     return booksController.searchByAuthor(author);
   }
 
+  @RequestMapping("/carts")
+  public List<ShoppingCart> getAllCarts() {
+    return cartController.getAllCarts();
+  }
+
   @RequestMapping("/cart")
   public ShoppingCart getCart(@RequestParam Integer id) {
     System.out.println(id);
@@ -59,33 +67,36 @@ public class HelloController {
     return cartItems.getCartItemsByCartId(id);
   }
 
+  @RequestMapping("/cart/all-items")
+  public Iterable<ShoppingCartItem> getCartAllItems() {
+    return cartItems.getAllCartItems();
+  }
+
   @RequestMapping("/cart/data")
   public ShoppingCartData getShoppingCartData(@RequestParam Integer id) {
     ShoppingCartData data = new ShoppingCartData();
 
-    // System.out.println(id);
+    ShoppingCart cart = cartController.getCartById(id);
+    System.out.println(cart);
+    data.setShoppingCart(cart);
 
-    // ShoppingCart cart = cartController.getCart(id);
-    // System.out.println(cart);
-    // data.setShoppingCart(cart);
+    List<ShoppingCartItem> items = cartItems.getCartItemsByCartId(id);
+    System.out.println(items);
+    data.setItems(items);
 
-    // System.out.println(cart);
-
-    // List<ShoppingCartItem> items = cartItems.getCartItemsByCartId(id);
-    // data.setItems(items);
-
-    // List<Book> books = new ArrayList<>();
-    // for (ShoppingCartItem item : items) {
-    // books.add(booksController.getBook(item.getIsbn()));
-    // }
-    // data.setBooks(books);
+    List<Book> books = new ArrayList<>();
+    for (ShoppingCartItem item : items) {
+      System.out.println(item);
+      books.add(booksController.getBook(item.getIsbn()));
+    }
+    data.setBooks(books);
 
     return data;
   }
 
   @PutMapping("/cart/item")
   public String addCartItem(@RequestBody ShoppingCartItem item) {
-    cartItems.addItemToCart(item.getCartItemId(), item.getQuantity(), item.getQuantity(), item.getCartId())
+    cartItems.addItemToCart(item.getCartItemId(), item.getQuantity(), item.getQuantity(), item.getCartId());
     return "goooooooooooooooood morning Hong Kong!";
   }
 

@@ -13,8 +13,7 @@ import org.springframework.stereotype.Repository;
 // CRUD refers Create, Read, Update, Delete
 
 @Repository
-public interface ShoppingCartItemRepository extends CrudRepository<Book, Integer> {
-
+public interface ShoppingCartItemRepository extends CrudRepository<ShoppingCartItem, Integer> {
   @Modifying
   @Query(value = "INSERT INTO shoppingCartItems(cartItemId, quantity, isbn, cartId) VALUES (?1, ?2, ?3, ?4)", nativeQuery = true)
   @Transactional
@@ -22,5 +21,8 @@ public interface ShoppingCartItemRepository extends CrudRepository<Book, Integer
 
   @Query(value = "SELECT * FROM shoppingCartItems WHERE cartId = ?1", nativeQuery = true)
   List<ShoppingCartItem> getCartItemsByCartId(Integer cartId);
+
+  @Query(value = "SELECT * FROM shoppingCartItems", nativeQuery = true)
+  List<ShoppingCartItem> getAllCartItems();
 
 }
