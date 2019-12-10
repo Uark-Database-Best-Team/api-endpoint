@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 // CRUD refers Create, Read, Update, Delete
 
 @Repository
-public interface CreditCardRepository extends CrudRepository<Book, Integer> {
+public interface ShoppingCartRepository extends CrudRepository<Book, Integer> {
   @Query(value = "SELECT * FROM addresses WHERE addressId = ?1", nativeQuery = true)
-  List<CreditCard> findByFirstnameEndsWith(String title);
+  List<ShoppingCart> findByFirstnameEndsWith(String title);
 }

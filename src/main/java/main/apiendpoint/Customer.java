@@ -57,19 +57,19 @@ public class Customer {
     this.email = email;
   }
 
-  public Integer getCustomerId() {
-    return this.customerId;
+  public String getPassword() {
+    return this.password;
   }
 
-  public void setCustomerId(Integer customerId) {
-    this.customerId = customerId;
+  public void setPassword(String password) {
+    this.password = password;
   }
 
-  public Integer getCustomerId() {
-    return this.customerId;
+  public Integer getAddressId() {
+    return this.addressId;
   }
 
-  public void setCustomerId(Integer customerId) {
-    this.customerId = customerId;
+  public void setAddressId(Integer addressId) {
+    this.addressId = addressId;
   }
 }

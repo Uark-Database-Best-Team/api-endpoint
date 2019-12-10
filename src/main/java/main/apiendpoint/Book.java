@@ -12,16 +12,18 @@ public class Book {
   private Integer isbn;
   private Integer edition;
   private String title;
+  private String category;
+  private Integer price;
   private Integer year;
   private String publisher;
   private String authors;
 
-  public Integer getId() {
+  public Integer getIsbn() {
     return isbn;
   }
 
-  public void setId(Integer id) {
-    this.isbn = id;
+  public void setIsbn(Integer isbn) {
+    this.isbn = isbn;
   }
 
   public String getTitle() {
@@ -30,6 +32,14 @@ public class Book {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getCategory() {
+    return category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
   }
 
   public Integer getEdition() {
@@ -56,11 +66,19 @@ public class Book {
     this.publisher = publisher;
   }
 
-  public String authors() {
+  public String getAuthors() {
     return authors;
   }
 
   public void setAuthors(String authors) {
     this.authors = authors;
+  }
+
+  public Integer getPrice() {
+    return price;
+  }
+
+  public void setPrice(Integer price) {
+    this.price = price;
   }
 }
