@@ -19,7 +19,7 @@ public class ShoppingCart {
     return this.cartId;
   }
 
-  public void cartId(Integer cartId) {
+  public void setCartId(Integer cartId) {
     this.cartId = cartId;
   }
 
