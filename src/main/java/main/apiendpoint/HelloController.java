@@ -2,6 +2,7 @@ package main.apiendpoint;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,11 @@ public class HelloController {
 
   @RequestMapping("/cart")
   public ShoppingCart getCart(@RequestParam Integer id) {
-    System.out.println(id);
+    return cartController.getCartById(id);
+  }
+
+  @RequestMapping("/user/carts")
+  public ShoppingCart getCartsByUserId(@RequestParam Integer id) {
     return cartController.getCartById(id);
   }
 
@@ -95,9 +100,17 @@ public class HelloController {
     return data;
   }
 
+  @PutMapping("/cart")
+  public ShoppingCart createShoppingCart(@RequestBody ShoppingCart cart) {
+    Date createData = new Date(1);
+    cartController.createShoppingCart(cart.getCartId(), cart.getCartName(), cart.getCustomerId(), createData);
+    return cartController.getCartById(cart.getCartId());
+  }
+
   @PutMapping("/cart/item")
   public String addCartItem(@RequestBody ShoppingCartItem item) {
-    cartItems.addItemToCart(item.getCartItemId(), item.getQuantity(), item.getQuantity(), item.getCartId());
+    cartItems.addItemToCart(item.getCartItemId(), item.getQuantity(), item.getIsbn(), item.getCartId());
+
     return "Added item";
   }
 
@@ -109,6 +122,6 @@ public class HelloController {
 }
 
 class MergeShoppingCartRequest {
-  Integer cartId1;
-  Integer cartId2;
+  public Integer cartId1;
+  public Integer cartId2;
 }
