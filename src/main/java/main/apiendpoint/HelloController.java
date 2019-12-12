@@ -102,9 +102,9 @@ public class HelloController {
   }
 
   @PostMapping("/cart/merge")
-  public String mergeShoppingCarts(@RequestBody MergeShoppingCartRequest req) {
+  public ShoppingCartData mergeShoppingCarts(@RequestBody MergeShoppingCartRequest req) {
     cartController.mergeShoppingCarts(req.cartId1, req.cartId2);
-    return "Carts Merged";
+    return getShoppingCartData(req.cartId1);
   }
 }
 
