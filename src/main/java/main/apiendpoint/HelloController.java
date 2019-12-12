@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class HelloController {
 
   @RequestMapping("/")
   public String index() {
-    return "Fuck you";
+    return "Hello World";
   }
 
   @RequestMapping("/books")
@@ -97,7 +98,17 @@ public class HelloController {
   @PutMapping("/cart/item")
   public String addCartItem(@RequestBody ShoppingCartItem item) {
     cartItems.addItemToCart(item.getCartItemId(), item.getQuantity(), item.getQuantity(), item.getCartId());
-    return "goooooooooooooooood morning Hong Kong!";
+    return "Added item";
   }
 
+  @PostMapping("/cart/merge")
+  public String mergeShoppingCarts(@RequestBody MergeShoppingCartRequest req) {
+    cartController.mergeShoppingCarts(req.cartId1, req.cartId2);
+    return "Carts Merged";
+  }
+}
+
+class MergeShoppingCartRequest {
+  Integer cartId1;
+  Integer cartId2;
 }
